@@ -1,5 +1,4 @@
 from typing import List
-import numpy as np
 
 def solve(X: List) -> int:
     x_max = max(X)

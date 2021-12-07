@@ -1,7 +1,6 @@
 from typing import List
-import numpy as np
 
-def solve(X) -> int:
+def solve(X: List) -> int:
     # smart solution using hashmap, grouping together fishes by their age
     # List was unnecessary to store their positions
     # now, it is O(k) * O(t)

@@ -1,5 +1,4 @@
 from typing import List
-import numpy as np
 
 def solve(X: List) -> int:
     # naive solution, roughly O(2^n) * O(t)
