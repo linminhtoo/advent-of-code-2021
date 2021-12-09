@@ -24,9 +24,10 @@ def solve(X: List) -> int:
         for d in displayed:
             len2d[len(d)].append(d)
 
-        seg2char = {}  # e.g. segment 1 maps to string repr character "d"
+        char2seg = {}  # e.g. string repr character "d" maps to segment 1
         # difference between string repr length 3 (seven) and length 2 (one) --> segment 1
-        seg2char[1] = list(set(len2d[3][0]) - set(len2d[2][0]))[0]
+        one_char = list(set(len2d[3][0]) - set(len2d[2][0]))[0]
+        char2seg[one_char] = 1
 
         four = set(len2d[4][0])  # only digit with string repr length 4 is four
         len_fives = len2d[5]  # look at the 3 string reprs with length 5, they represent two, three and five
@@ -39,48 +40,44 @@ def solve(X: List) -> int:
             if v == 1:
                 if k not in four:
                     # segment 5 is not in four and it only appears once among two, three and five
-                    seg2char[5] = k
+                    char2seg[k] = 5
+                    break
 
         for repr in len_fives:
-            if seg2char[5] in set(repr):
+            if k in set(repr):
                 two = repr  # this string displays 2 when its segments are activated
                 break
 
         for c in two:
             if five_counts[c] == 2:
                 # among the 5-segment numbers, the segment that activates twice and is part of two must be segment 2
-                seg2char[2] = c
+                char2seg[c] = 2
                 break
 
         four_repr = set(len2d[4][0])
-        for c in two:
+        for t in two:
             # among the segments representing two, the segment that is needed to display four, and has not been used already as segment 2
             # must be segment 7 (the middle segment)
-            if c != seg2char[2] and c in four_repr:
-                seg2char[7] = c
+            if t != c and t in four_repr:
+                char2seg[t] = 7
 
         for c in two:
             # the last segment to represent two, that hasn't been used so far, must be segment 4 (the bottom segment)
-            if c not in seg2char.values():
-                seg2char[4] = c
+            if c not in char2seg.keys():
+                char2seg[c] = 4
 
         one_repr = set(len2d[2][0])
         for c in one_repr:
-            if c not in seg2char.values():
+            if c not in char2seg.keys():
                 # for the two segments to represent one, the one that hasn't been used (for two), must be segment 3
-                seg2char[3] = c
+                char2seg[c] = 3
 
 
         eight_repr = set(len2d[7][0])
         for c in eight_repr:
-            if c not in seg2char.values():
+            if c not in char2seg.keys():
                 # the only segment we have not used so far is segment 6, which we can find in eight
-                seg2char[6] = c
-
-        char2seg = {}
-        for k, v in seg2char.items():
-            # map each string repr character to its segment number
-            char2seg[v] = k
+                char2seg[c] = 6
 
         curr_rst = []
         for d in decode:  # for each digit in the number to decode
