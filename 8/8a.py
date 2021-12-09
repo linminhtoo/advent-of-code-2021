@@ -10,7 +10,7 @@ def solve(X: List) -> int:
     return cnt
 
 if __name__ == "__main__":
-    for fname in ["7a_test.txt", "7a.txt"]:
+    for fname in ["8a_test.txt", "8a.txt"]:
         with open(fname, "r") as f:
             x = [l.strip() for l in f.readlines()]
             x = [l.split('|') for l in x]
