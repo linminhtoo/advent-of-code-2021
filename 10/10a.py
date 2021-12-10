@@ -31,8 +31,8 @@ def solve(X: List) -> int:
 
 
 if __name__ == "__main__":
-    for fname in ["9a_test.txt", "9a.txt"]:
-    # for fname in ["9a_test.txt"]:
+    for fname in ["10a_test.txt", "10a.txt"]:
+    # for fname in ["10a_test.txt"]:
         with open(fname, "r") as f:
             x = [l.strip() for l in f.readlines()]
 
