@@ -72,7 +72,6 @@ def solve(X: List) -> int:
                 # for the two segments to represent one, the one that hasn't been used (for two), must be segment 3
                 char2seg[c] = 3
 
-
         eight_repr = set(len2d[7][0])
         for c in eight_repr:
             if c not in char2seg.keys():
