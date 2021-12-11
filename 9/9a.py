@@ -1,13 +1,11 @@
 from typing import List
 import numpy as np
 
-def solve(X: List) -> int:
+def solve(X0: List) -> int:
     # pad borders with 9 so we can compare easily in next step
-    for i in range(len(X)):
-        X[i] = [9] + list(X[i]) + [9]
-    X.insert(0, ['9'] * len(X[1]))
-    X.append(['9'] * len(X[1]))
-    X = np.array(X).astype(int)
+    l, w = len(X0) + 2, len(X0[0]) + 2
+    X = np.ones((l, w)) * 9
+    X[1:l-1, 1:w-1] = np.array(list(map(list, X0))).astype(int)
 
     # collect heights of lowest points in is_low
     is_low = np.zeros(X.shape)
